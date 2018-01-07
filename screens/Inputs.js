@@ -3,15 +3,54 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 
 class Inputs extends React.Component {
     state = {
-        searchWord: ''
+        searchWord: '',
+        imageURL: 'http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg'
     }
     handleSearchWord = (text) => {
         this.setState({ searchWord: text })
     }
 
-    lookForWord = (searchTerm) => {
-        alert('you searched for: ' + searchTerm)
+    lookForWord = (searchTerm, imageURL) => {
+         // Replace the subscriptionKey string value with your valid subscription key.
+        var subscriptionKey = "fb4716ed10714097b83eee1544ba4d94";
+
+        let uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Categories%2CDescription%2CColor&details=&language=en";
+
         //now search for the thing in the image
+
+
+        // Perform the REST API call.
+
+        fetch(uriBase, {
+            // Request headers.
+            headers: {
+                "Content-Type": "application/json",
+                "Ocp-Apim-Subscription-Key": subscriptionKey
+            },
+            method: "POST",
+
+            // Request body.
+            body: JSON.stringify({"url": this.state.imageURL})
+        })
+            .then(data => data.json())
+            .then(data => alert(JSON.stringify(data)))
+            .catch((error) => alert(error));
+        // $.ajax({
+        //     url: uriBase + "?" + $.param(params),
+
+        //     // Request headers.
+        //     beforeSend: function(xhrObj){
+        //         xhrObj.setRequestHeader("Content-Type","application/json");
+        //         xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+        //     },
+
+        //     type: "POST",
+
+        //     // Request body.
+        //     data: '{"url": ' + '"' + sourceImageUrl + '"}',
+        // })
+
+
     }
 
     render(){
