@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Camera from 'react-native-camera';
+import Inputs from './screens/Inputs.js';
 
 export default class App extends React.Component {
 
@@ -26,8 +27,6 @@ export default class App extends React.Component {
 
 
   render() {
-
-
       if(state.currentScreen === "camera"){
           return (
               <Camera
