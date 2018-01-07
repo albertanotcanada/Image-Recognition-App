@@ -5,7 +5,9 @@ class Inputs extends React.Component {
     state = {
         searchWord: '',
         currentImageData: '',
-        hasSubmitted: false
+        hasSubmitted: false,
+        numCols: 2,
+        numRows: 1
     };
     handleSearchWord = (text) => {
         this.setState({ searchWord: text })
@@ -55,8 +57,25 @@ class Inputs extends React.Component {
             return this.returnDefaultSearchScreen();
         }
         if(this.state.hasSubmitted && this.state.currentImageData !== '') {
-            //return the result!
+            this.whereIsOurObject();
         }
+    }
+
+
+    whereIsOurObject() {
+        //for every col
+        //for every row
+        //is our object contained there?
+        //
+        return this.renderObjectIs("on the left!");
+    }
+
+    renderObjectIs(location) {
+        return (
+            <View style = {styles.container}>
+                <Text>{this.state.searchWord} + "is" + {location} </Text>
+            </View>
+        )
     }
 
     returnDefaultSearchScreen() {
