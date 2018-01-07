@@ -40,10 +40,21 @@ class Inputs extends React.Component {
         return this.renderObjectIs("on the left!");
     }
 
+    returnToCamera(){
+        //TODO: must return a camera prop
+       return <App />;
+    }
+
     renderObjectIs(location) {
         return (
             <View style = {styles.container}>
                 <Text>{this.state.searchWord} + "is" + {location} </Text>
+                <Button
+                    onPress={returnToCamera}
+                    title="Return to Camera"
+                    color="#841584"
+                    accessibilityLabel="Return to the camera"
+                />
             </View>
         )
     }
