@@ -44,7 +44,7 @@ class Inputs extends React.Component {
             this.state.voiceResults[0] === "where" &&
             this.state.voiceResults[1] === "is" &&
             this.state.voiceResults[2] === "my") {
-            this.setState({ searchWord: this.state.voiceResults[3] });
+            this.setState({ searchWord: [this.state.voiceResults[3]] });
         } else {
             this.setState({ searchWord: stringVal });
         }
