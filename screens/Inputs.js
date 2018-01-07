@@ -13,36 +13,6 @@ class Inputs extends React.Component {
         this.setState({ searchWord: text })
     };
 
-         // Replace the subscriptionKey string value with your valid subscription key.
-       // const subscriptionKey = "fb4716ed10714097b83eee1544ba4d94";
-
-        // let uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Categories%2CDescription%2CColor&details=&language=en";
-
-        //now search for the thing in the image
-
-        // fetch(uriBase, {
-        //     // Request headers.
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Ocp-Apim-Subscription-Key": subscriptionKey
-        //     },
-        //     method: "POST",
-        //
-        //     // Request body.
-        //     body: JSON.stringify({"url": this.state.imageURL})
-        // })
-        //     .then(data => data.json()) //waits for the ~promise!~
-        //     .then(data => {
-        //         for(let i in data.description.tags) { //should prob error check this
-        //             if(this.state.searchWord===data.description.tags[i]) {
-        //                 alert("Yes! Your image is contained!");
-        //                 return
-        //             }
-        //         }
-        //         alert("No! :( Your image is not contained!");
-        //     })
-        //     .catch((error) => alert(error));
-
 
     checkResult() {
         if(this.state.hasSubmitted && this.state.currentImageData === '') {
