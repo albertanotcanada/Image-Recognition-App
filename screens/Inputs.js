@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, ActivityIndicator, Image, Button, TouchableHighlight } from 'react-native'
 import Voice from 'react-native-voice';
-import App from '../App.js';
-
+import Tts from 'react-native-tts';
 
 class Inputs extends React.Component {
 
@@ -86,7 +85,7 @@ class Inputs extends React.Component {
             )
         }
         if(!this.state.hasSubmitted) {
-            return this.props.returnToParent();
+            return this.returnDefaultSearchScreen();
         }
         if(this.state.hasSubmitted && this.state.currentImageData !== '') {
             return this.whereIsOurObject();
@@ -110,7 +109,7 @@ class Inputs extends React.Component {
         // alert(this.state.currentImageData.blocks[0].tags);
         // alert(this.state.currentImageData.blocks[1].tags);
         //alert(this.state.searchWord[0] === "computer");
-        alert(this.state.currentImageData.meta.tags);
+        //alert(this.state.currentImageData.meta.tags);
         //alert(this.state.currentImageData.blocks[1].tags.includes("computer"));
         if(this.state.currentImageData.blocks[1].tags.includes(this.state.searchWord[0])){
             onRight = 1;
@@ -129,11 +128,12 @@ class Inputs extends React.Component {
     }
 
     renderObjectIs(location) {
+        Tts.speak(`${this.state.searchWord[0]} is ${location}`);
         return (
             <View style = {styles.container}>
                 <Text>{this.state.searchWord[0]} is {location} </Text>
                 <Button
-                    onPress={this.returnToCamera}
+                    onPress={this.props.gotoCamera}
                     title="Return to Camera"
                     color="#841584"
                     accessibilityLabel="Return to the camera"

@@ -66,7 +66,7 @@ export default class App extends React.Component {
           );
       } else if(this.state.currentScreen === "inputText"){
           //alert(JSON.stringify(this.state.currentPic.data));
-          return <Inputs returnToParent={this} photo={this.state.currentPic.data}/>;
+          return <Inputs returnToParent={this.gotoCamera} photo={this.state.currentPic.data}/>;
       }
 
   }
