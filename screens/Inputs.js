@@ -5,14 +5,14 @@ class Inputs extends React.Component {
     state = {
         searchWord: '',
         imageURL: 'http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg'
-    }
+    };
     handleSearchWord = (text) => {
         this.setState({ searchWord: text })
-    }
+    };
 
-    lookForWord = (searchTerm, imageURL) => {
+    lookForWord = (searchTerm) => {
          // Replace the subscriptionKey string value with your valid subscription key.
-        var subscriptionKey = "fb4716ed10714097b83eee1544ba4d94";
+        const subscriptionKey = "fb4716ed10714097b83eee1544ba4d94";
 
         let uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Categories%2CDescription%2CColor&details=&language=en";
 
@@ -32,26 +32,19 @@ class Inputs extends React.Component {
             // Request body.
             body: JSON.stringify({"url": this.state.imageURL})
         })
-            .then(data => data.json())
-            .then(data => alert(JSON.stringify(data)))
+            .then(data => data.json()) //waits for the ~promise!~
+            .then(data => {
+                for(let i in data.description.tags) { //should prob error check this
+                    if(tag===data.description.tags[i]) {
+                        alert("WE DID IT");
+                        return
+                    }
+                }
+                alert("NOPE!");
+            })
             .catch((error) => alert(error));
-        // $.ajax({
-        //     url: uriBase + "?" + $.param(params),
 
-        //     // Request headers.
-        //     beforeSend: function(xhrObj){
-        //         xhrObj.setRequestHeader("Content-Type","application/json");
-        //         xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
-        //     },
-
-        //     type: "POST",
-
-        //     // Request body.
-        //     data: '{"url": ' + '"' + sourceImageUrl + '"}',
-        // })
-
-
-    }
+    };
 
     render(){
         return (
