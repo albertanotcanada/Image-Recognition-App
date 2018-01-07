@@ -15,8 +15,7 @@ export default class App extends React.Component {
 
 
     return (
-    <View>
-        <Inputs />
+
         <Camera
             ref={(cam) => {
                 this.camera = cam;
@@ -27,7 +26,6 @@ export default class App extends React.Component {
         </Camera>
 
 
-    </View>
 
     );
   }
@@ -40,4 +38,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        height: 400,
+        width: 500
+    },
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        color: '#000',
+        padding: 10,
+        margin: 40
+    }
 });
