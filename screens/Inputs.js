@@ -27,9 +27,19 @@ class Inputs extends React.Component {
 
 
     onSpeechResultsHandler(e) {
+        let stringVal = e.value[0].split(" ");
         this.setState({
-            voiceResults: e.value,
+            voiceResults: stringVal,
         });
+
+        if(this.state.voiceResults.length > 3 &&
+            this.state.voiceResults[0].toLowerCase() === "where" &&
+            this.state.voiceResults[1].toLowerCase() === "is" &&
+            this.state.voiceResults[2].toLowerCase() === "my") {
+            this.setState({ searchWord: this.state.voiceResults[3] });
+        } else {
+            this.setState({ searchWord: stringVal });
+        }
     }
 
     async onStartButtonPress(){
@@ -51,12 +61,7 @@ class Inputs extends React.Component {
             }
             this.setState({isAudioRecording: false});
         }
-
-
     }
-    handleSearchWord = (text) => {
-        this.setState({ searchWord: text })
-    };
 
     componentDidMount() {
         this.mounted = true;
@@ -123,7 +128,7 @@ class Inputs extends React.Component {
     returnDefaultSearchScreen() {
         return (
             <View style = {[styles.container, {backgroundColor: this.currColor()}]}>
-                <TouchableHighlight onPress = {() => this.onStartButtonPress()}>
+                <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="white">
                 <Image
                     source={require('../mic.png')}
                 />
