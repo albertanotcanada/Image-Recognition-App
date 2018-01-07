@@ -27,7 +27,7 @@ Our hopes is to actually move to our own Machine Learning model that is trained 
 
 ![1](./img_1.png)
 
-![2](./img_2.png)
+![2](./img_2.PNG)
 
 ![3](./img_3.png)
 
