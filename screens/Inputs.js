@@ -88,13 +88,16 @@ export default Inputs
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 23
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     input: {
         margin: 15,
         height: 40,
         borderColor: '#f45151',
-        borderWidth: 1
+        borderWidth: 1,
+        width: 300,
     },
     submitButton: {
         backgroundColor: '#f45151',
