@@ -15,15 +15,10 @@ export default class App extends React.Component {
 
         }
     }
-   
-
 
     takePicture() {
-        this.setState({currentScreen: "inputText"});
         this.camera.capture()
-            .then((data) => (
-                this.setState({currentPic: data})
-            ))
+            .then((data) => this.setState({currentPic: data, currentScreen: "inputText"}))
             .catch(err => console.error(err));
 
     }
@@ -49,15 +44,18 @@ export default class App extends React.Component {
                   ref={(cam) => {
                       this.camera = cam;
                   }}
+                  captureTarget={Camera.constants.CaptureTarget.memory}
                   style={styles.preview}
                   aspect={Camera.constants.Aspect.fill}>
+
                   <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
               </Camera>
 
 
           );
       } else if(this.state.currentScreen === "inputText"){
-          return <Inputs />;
+          alert(JSON.stringify(this.state.currentPic.data));
+          return <Inputs photo={this.state.currentPic.data}/>;
       }
 
   }

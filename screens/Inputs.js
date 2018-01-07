@@ -13,6 +13,15 @@ class Inputs extends React.Component {
         this.setState({ searchWord: text })
     };
 
+    componentDidMount() {
+        this.mounted = true;
+        fetch('https://desolate-spire-63252.herokuapp.com?columns=2&rows=1', {
+            method: 'POST',
+            body: this.props.photo
+        })
+            .then(result => result.json())
+            .then(result => alert(JSON.stringify(result)))
+    }
 
     checkResult() {
         if(this.state.hasSubmitted && this.state.currentImageData === '') {
