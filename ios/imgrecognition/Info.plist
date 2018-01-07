@@ -40,6 +40,10 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+    <string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
     <key>NSCameraUsageDescription</key>
     <string>$(PRODUCT_NAME) camera use</string>
 	<key>NSAppTransportSecurity</key>

@@ -6,11 +6,23 @@ import Inputs from './screens/Inputs.js';
 import Camera from 'react-native-camera';
 
 export default class App extends React.Component {
+
+
+    constructor() {
+        super();
+        state = {
+            currentPic: ''
+        }
+    }
     takePicture() {
         this.camera.capture()
-            .then((data) => console.log(data))
+            .then((data) => (
+                this.setState({currentPic: data})
+            ))
             .catch(err => console.error(err));
     }
+
+
   render() {
 
 
@@ -51,6 +63,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: '#000',
         padding: 10,
-        margin: 40
+        margin: 40,
+        height: 80,
+        width: 150
     }
 });
