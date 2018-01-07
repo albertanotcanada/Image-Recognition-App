@@ -3,6 +3,7 @@ package com.imgrecognition;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import net.no_mad.tts.TextToSpeechPackage;
 import de.innfactory.apiai.RNApiAiPackage;
 import com.wenkesj.voice.VoicePackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new TextToSpeechPackage(),
             new RNApiAiPackage(),
             new VoicePackage(),
             new RCTCameraPackage()

@@ -23,6 +23,10 @@ export default class App extends React.Component {
 
     }
 
+    gotoCamera() {
+        this.setState({currentScreen: "camera"});
+    }
+
     sendPicToServer() {
         // fetch(uriBase, {
         //
@@ -61,8 +65,8 @@ export default class App extends React.Component {
 
           );
       } else if(this.state.currentScreen === "inputText"){
-          alert(JSON.stringify(this.state.currentPic.data));
-          return <Inputs photo={this.state.currentPic.data}/>;
+          //alert(JSON.stringify(this.state.currentPic.data));
+          return <Inputs returnToParent={this.gotoCamera} photo={this.state.currentPic.data}/>;
       }
 
   }

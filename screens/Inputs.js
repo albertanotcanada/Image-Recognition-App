@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, ActivityIndicator, Image, TouchableHighlight } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, ActivityIndicator, Image, Button, TouchableHighlight } from 'react-native'
 import Voice from 'react-native-voice';
-
+import Tts from 'react-native-tts';
 
 class Inputs extends React.Component {
 
@@ -78,7 +78,7 @@ class Inputs extends React.Component {
             body: this.props.photo
         })
             .then(result => result.json())
-            .then(result => alert(JSON.stringify(result)))
+            .then(result => this.setState({currentImageData: result}))
     }
 
     checkResult() {
@@ -94,7 +94,7 @@ class Inputs extends React.Component {
             return this.returnDefaultSearchScreen();
         }
         if(this.state.hasSubmitted && this.state.currentImageData !== '') {
-            this.whereIsOurObject();
+            return this.whereIsOurObject();
         }
     }
 
@@ -104,20 +104,42 @@ class Inputs extends React.Component {
         //for every row
         //is our object contained there?
         //
-        return this.renderObjectIs("on the left!");
-    }
+        var onLeft = 0;
+        var onRight = 0;
 
-    returnToCamera(){
-        //TODO: must return a camera prop
-       return <App />;
+        //alert(JSON.stringify(this.state.currentImageData.blocks[0].tags[0]));
+        if(this.state.currentImageData.blocks[0].tags.includes(this.state.searchWord[0])){
+            onLeft = 1;
+        }
+
+        // alert(this.state.currentImageData.blocks[0].tags);
+        // alert(this.state.currentImageData.blocks[1].tags);
+        //alert(this.state.searchWord[0] === "computer");
+        //alert(this.state.currentImageData.meta.tags);
+        //alert(this.state.currentImageData.blocks[1].tags.includes("computer"));
+        if(this.state.currentImageData.blocks[1].tags.includes(this.state.searchWord[0])){
+            onRight = 1;
+        }
+
+        if(onLeft === 1 && onRight === 0){
+            return this.renderObjectIs("on the left!");
+        } else if(onRight === 1 && onLeft === 0){
+            return this.renderObjectIs("on the right!");
+        } else if(this.state.currentImageData.meta.tags.includes(this.state.searchWord[0])){
+            return this.renderObjectIs("on both sides!");
+        } else {
+            return this.renderObjectIs("on neither side!");
+        }
+
     }
 
     renderObjectIs(location) {
+        Tts.speak(`${this.state.searchWord[0]} is ${location}`);
         return (
             <View style = {styles.container}>
-                <Text>{this.state.searchWord} + "is" + {location} </Text>
+                <Text>{this.state.searchWord[0]} is {location} </Text>
                 <Button
-                    onPress={returnToCamera}
+                    onPress={this.props.gotoCamera}
                     title="Return to Camera"
                     color="#841584"
                     accessibilityLabel="Return to the camera"
