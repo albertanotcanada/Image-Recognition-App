@@ -1,6 +1,9 @@
 ## Image Recognition App
 
-![header](./header.png)
+<p align="center">
+    <img width="250" src="./header.png" hspace="20">
+</p>
+
 
 ### Submission for Dragon Hacks 2018
 
@@ -27,7 +30,7 @@ Our hopes is to actually move to our own Machine Learning model that is trained 
 
 <p align="center">
     <img width="250" src="./img_1.png" hspace="20">
-    <img width="250" src="./img_2.png" hspace="20">
+    <img width="250" src="./img_2.PNG" hspace="20">
     <img width="250" src="./img_3.png" hspace="20">
 </p>
 <p align="left">
