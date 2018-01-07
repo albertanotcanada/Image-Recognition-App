@@ -8,7 +8,7 @@ export default class App extends React.Component {
 
     constructor() {
         super();
-        state = {
+        this.state = {
             currentPic: '',
             currentScreen: "camera"
         }
@@ -28,7 +28,7 @@ export default class App extends React.Component {
   render() {
 
 
-      if(state.currentScreen == "camera"){
+      if(state.currentScreen === "camera"){
           return (
               <Camera
                   ref={(cam) => {
@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
 
           );
-      } else if(state.currentScreen == "inputText"){
+      } else if(state.currentScreen === "inputText"){
 
           return <Inputs />;
       }
