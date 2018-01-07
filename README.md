@@ -25,10 +25,11 @@ Our hopes is to actually move to our own Machine Learning model that is trained 
 
 #### Additional Screenshots
 
-![1](./img_1.png)
-
-![2](./img_2.png)
-
-![3](./img_3.png)
-
-![4](./img_4.png)
+<p align="center">
+    <img width="250" src="./img_1.png" hspace="20">
+    <img width="250" src="./img_2.png" hspace="20">
+    <img width="250" src="./img_3.png" hspace="20">
+</p>
+<p align="left">
+    <img width="250" src="./img_4.png" hspace="20">
+</p>
