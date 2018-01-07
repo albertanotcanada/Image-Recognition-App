@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, ActivityIndicator, Image, Button, TouchableHighlight } from 'react-native'
 import Voice from 'react-native-voice';
-import Tts from 'react-native-tts';
+//import Tts from 'react-native-tts';
 
 class Inputs extends React.Component {
 
@@ -134,16 +134,11 @@ class Inputs extends React.Component {
     }
 
     renderObjectIs(location) {
-        Tts.speak(`${this.state.searchWord[0]} is ${location}`);
+        //Tts.speak(`${this.state.searchWord[0]} is ${location}`);
         return (
             <View style = {styles.container}>
                 <Text>{this.state.searchWord[0]} is {location} </Text>
-                <Button
-                    onPress={this.props.gotoCamera}
-                    title="Return to Camera"
-                    color="#841584"
-                    accessibilityLabel="Return to the camera"
-                />
+
             </View>
         )
     }
