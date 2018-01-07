@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TouchableHighlight, Image } from 'react-native';
 
 import Camera from 'react-native-camera';
 import Inputs from './screens/Inputs.js';
@@ -48,7 +48,14 @@ export default class App extends React.Component {
                   style={styles.preview}
                   aspect={Camera.constants.Aspect.fill}>
 
-                  <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+                  <TouchableHighlight style={styles.capture}  onPress={this.takePicture.bind(this)}
+                                      accessibilityLabel={"Take Image"}>
+                      <Image
+                          source={require('./cam.png')} style={{width: 130, height: 100}}
+
+                      />
+                  </TouchableHighlight>
+
               </Camera>
 
 
@@ -64,7 +71,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -77,12 +83,15 @@ const styles = StyleSheet.create({
     },
     capture: {
         flex: 0,
-        backgroundColor: '#fff',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        alignContent: 'center',
+        backgroundColor: 'transparent',
         borderRadius: 5,
-        color: '#000',
         padding: 10,
+        paddingRight: 120,
         margin: 40,
-        height: 80,
+        height: 100,
         width: 150
     }
 });

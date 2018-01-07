@@ -14,7 +14,8 @@ class Inputs extends React.Component {
             numCols: 2,
             numRows: 1,
             isAudioRecording: false,
-            voiceResults: '',
+            voiceResults: [],
+            voiceResultsOneStringFormat: "",
         };
 
         Voice.onSpeechStart = this.onSpeechStartHandler.bind(this);
@@ -27,15 +28,16 @@ class Inputs extends React.Component {
 
 
     onSpeechResultsHandler(e) {
-        let stringVal = e.value[0].split(" ");
+        let stringVal = e.value[0].toLowerCase().split(" ");
+        this.setState({voiceResultsOneStringFormat: e.value[0].toLowerCase()});
         this.setState({
             voiceResults: stringVal,
         });
 
         if(this.state.voiceResults.length > 3 &&
-            this.state.voiceResults[0].toLowerCase() === "where" &&
-            this.state.voiceResults[1].toLowerCase() === "is" &&
-            this.state.voiceResults[2].toLowerCase() === "my") {
+            this.state.voiceResults[0] === "where" &&
+            this.state.voiceResults[1] === "is" &&
+            this.state.voiceResults[2] === "my") {
             this.setState({ searchWord: this.state.voiceResults[3] });
         } else {
             this.setState({ searchWord: stringVal });
@@ -45,7 +47,7 @@ class Inputs extends React.Component {
     async onStartButtonPress(){
         if(!this.state.isAudioRecording) {
             this.setState({
-                voiceResults: [],
+                voiceResults: "",
                 isAudioRecording: true
             });
             try {
@@ -135,15 +137,17 @@ class Inputs extends React.Component {
                 </TouchableHighlight>
                 <TextInput style = {styles.input}
                            placeholder = "Type or talk to search ..."
-                           value = {this.state.voiceResults.toString()}
+                           value = {this.state.voiceResultsOneStringFormat.toString()}
                            placeholderTextColor = "#000"
-                           autoCapitalize = "none"
-                           onChangeText = {this.handleSearchWord}/>
+                           autoCapitalize = "none" />
 
                 <TouchableOpacity
                     style = {styles.submitButton}
                     onPress = {
-                        () => this.setState({hasSubmitted: true})
+                        () => {
+                            this.setState({hasSubmitted: true});
+                            this.setState({voiceResults: ""});
+                        }
                     }>
                     <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
