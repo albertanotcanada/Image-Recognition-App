@@ -36,11 +36,11 @@ class Inputs extends React.Component {
             .then(data => {
                 for(let i in data.description.tags) { //should prob error check this
                     if(tag===data.description.tags[i]) {
-                        alert("WE DID IT");
+                        alert("Yes! Your image is contained!");
                         return
                     }
                 }
-                alert("NOPE!");
+                alert("No! :( Your image is not contained!");
             })
             .catch((error) => alert(error));
 
