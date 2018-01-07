@@ -12,7 +12,9 @@ class Inputs extends React.Component {
             currentImageData: '',
             hasSubmitted: false,
             numCols: 2,
-            numRows: 1
+            numRows: 1,
+            isAudioRecording: false,
+            voiceResults: '',
         };
 
         Voice.onSpeechStart = this.onSpeechStartHandler.bind(this);
@@ -22,15 +24,35 @@ class Inputs extends React.Component {
 
     onSpeechStartHandler(){}
     onSpeechEndHandler(){}
-    onSpeechResultsHandler(){}
 
-    onStartButtonPress(){
-        try {
-        Voice.start('en-US');
-        } catch (err) {
-            console.error(err);
+
+    onSpeechResultsHandler(e) {
+        this.setState({
+            voiceResults: e.value,
+        });
+    }
+
+    async onStartButtonPress(){
+        if(!this.state.isAudioRecording) {
+            this.setState({
+                voiceResults: [],
+                isAudioRecording: true
+            });
+            try {
+               await Voice.start('en-US');
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            try {
+                await Voice.stop();
+            } catch (e) {
+                console.error(e);
+            }
+            this.setState({isAudioRecording: false});
         }
-        console.warn("We made it!");
+
+
     }
     handleSearchWord = (text) => {
         this.setState({ searchWord: text })
@@ -91,17 +113,25 @@ class Inputs extends React.Component {
         )
     }
 
+    currColor() {
+        if(this.state.isAudioRecording) {
+            return "#00FF7F";
+        }
+        return "#f66464";
+    }
+
     returnDefaultSearchScreen() {
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.currColor()}]}>
                 <TouchableHighlight onPress = {() => this.onStartButtonPress()}>
                 <Image
                     source={require('../mic.png')}
                 />
                 </TouchableHighlight>
                 <TextInput style = {styles.input}
-                           placeholder = "Thing you're looking for"
-                           placeholderTextColor = "#f45151"
+                           placeholder = "Type or talk to search ..."
+                           value = {this.state.voiceResults.toString()}
+                           placeholderTextColor = "#000"
                            autoCapitalize = "none"
                            onChangeText = {this.handleSearchWord}/>
 
@@ -113,6 +143,7 @@ class Inputs extends React.Component {
                     <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
             </View>
+
         )
     }
 
@@ -135,14 +166,18 @@ const styles = StyleSheet.create({
         borderColor: '#f45151',
         borderWidth: 1,
         width: 300,
+        backgroundColor: "#fff",
+        borderRadius: 6,
+        paddingLeft: 3,
     },
     submitButton: {
-        backgroundColor: '#f45151',
+        backgroundColor: '#fff',
         padding: 10,
         margin: 15,
         height: 40,
+        borderRadius: 6,
     },
     submitButtonText:{
-        color: 'white'
+        color: '#000'
     }
 })
