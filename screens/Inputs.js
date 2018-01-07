@@ -126,6 +126,14 @@ class Inputs extends React.Component {
         )
     }
 
+    textOutput() {
+        if(this.state.voiceResultsOneStringFormat.toString().length > 30) {
+            return (this.state.voiceResultsOneStringFormat.toString().substr(0,30));
+        } else {
+            return (this.state.voiceResultsOneStringFormat.toString());
+        }
+    }
+
     currColor() {
         if(this.state.isAudioRecording) {
             return "#00FF7F";
@@ -135,19 +143,16 @@ class Inputs extends React.Component {
 
     returnDefaultSearchScreen() {
         return (
-            <View style = {[styles.container, {backgroundColor: this.currColor()}]}>
-                <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="transparent">
-                <Image
-                    source={require('../mic.png')}
-                />
-                </TouchableHighlight>
-                <Text style = {styles.input}
-                           placeholder = "Type or talk to search ..."
-                           value = {this.state.voiceResultsOneStringFormat.toString()}
-                           placeholderTextColor = "#000"
-                           autoCapitalize = "none"
-
-                />
+            <View style = {[styles.container, {backgroundColor: 'white'}]}>
+                <View style={[styles.top, {backgroundColor: this.currColor()}]}>
+                    <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="transparent">
+                    <Image
+                        source={require('../mic.png')}
+                    />
+                    </TouchableHighlight>
+                </View>
+                <Text style = {styles.input}>
+                    {this.textOutput()} </Text>
 
                 <TouchableOpacity
                     style = {styles.submitButton}
@@ -180,10 +185,10 @@ const styles = StyleSheet.create({
     input: {
         margin: 15,
         height: 40,
-        borderColor: '#f45151',
-        borderWidth: 1,
+        fontSize: 15,
         width: 300,
-        backgroundColor: "#fff",
+        color: 'black',
+        backgroundColor: 'white',
         borderRadius: 6,
         paddingLeft: 3,
     },
@@ -193,8 +198,17 @@ const styles = StyleSheet.create({
         margin: 15,
         height: 40,
         borderRadius: 6,
+        borderColor: 'black',
+        borderWidth: 3,
     },
     submitButtonText:{
-        color: '#000'
+        color: '#000',
+        borderColor: 'black',
+    },
+    top: {
+        width: 400,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
