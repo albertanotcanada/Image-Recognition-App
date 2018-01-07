@@ -24,6 +24,19 @@ export default class App extends React.Component {
 
     }
 
+    sendPicToServer() {
+        // fetch(uriBase, {
+        //
+        //     method: "POST",
+        //     body: JSON.stringify({"url": this.state.imageURL})
+        // })
+            // .then(data => data.json()) //waits for the ~promise!~
+            // .then(data => {
+            //
+            //     alert("No! :( Your image is not contained!");
+            // })
+            // .catch((error) => alert(error));
+    }
 
   render() {
       if(this.state.currentScreen === "camera"){
