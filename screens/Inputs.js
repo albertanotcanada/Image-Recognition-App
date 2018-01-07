@@ -94,7 +94,7 @@ class Inputs extends React.Component {
     returnDefaultSearchScreen() {
         return (
             <View style = {styles.container}>
-                <TouchableHighlight onPress = {() => this.onStartButtonPress()}>
+                <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="white">
                 <Image
                     source={require('../mic.png')}
                 />
