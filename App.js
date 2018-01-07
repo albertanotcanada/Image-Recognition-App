@@ -15,7 +15,6 @@ export default class App extends React.Component {
         }
     }
     takePicture() {
-        state.currentScreen = "inputText";
         this.setState({currentScreen: "inputText"});
         this.camera.capture()
             .then((data) => (
@@ -27,7 +26,7 @@ export default class App extends React.Component {
 
 
   render() {
-      if(state.currentScreen === "camera"){
+      if(this.state.currentScreen === "camera"){
           return (
               <Camera
                   ref={(cam) => {
@@ -40,7 +39,7 @@ export default class App extends React.Component {
 
 
           );
-      } else if(state.currentScreen === "inputText"){
+      } else if(this.state.currentScreen === "inputText"){
 
           return <Inputs />;
       }
