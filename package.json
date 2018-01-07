@@ -19,6 +19,8 @@
   "dependencies": {
     "react": "16.0.0",
     "react-native": "0.50.3",
-    "react-native-camera": "^0.12.0"
+    "react-native-camera": "^0.12.0",
+    "react-native-dialogflow": "^2.0.0",
+    "react-native-voice": "^0.2.5"
   }
 }
