@@ -13,7 +13,7 @@ class Inputs extends React.Component {
             hasSubmitted: false,
             numCols: 2,
             numRows: 1,
-            isAudioRecording: false,
+            isAudioRecording: true,
             voiceResults: [],
             voiceResultsOneStringFormat: "",
         };
@@ -21,6 +21,12 @@ class Inputs extends React.Component {
         Voice.onSpeechStart = this.onSpeechStartHandler.bind(this);
         Voice.onSpeechEnd = this.onSpeechEndHandler.bind(this);
         Voice.onSpeechResults = this.onSpeechResultsHandler.bind(this);
+
+        try {
+            Voice.start('en-US');
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     onSpeechStartHandler(){}
@@ -130,16 +136,18 @@ class Inputs extends React.Component {
     returnDefaultSearchScreen() {
         return (
             <View style = {[styles.container, {backgroundColor: this.currColor()}]}>
-                <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="white">
+                <TouchableHighlight onPress = {() => this.onStartButtonPress()} underlayColor="transparent">
                 <Image
                     source={require('../mic.png')}
                 />
                 </TouchableHighlight>
-                <TextInput style = {styles.input}
+                <Text style = {styles.input}
                            placeholder = "Type or talk to search ..."
                            value = {this.state.voiceResultsOneStringFormat.toString()}
                            placeholderTextColor = "#000"
-                           autoCapitalize = "none" />
+                           autoCapitalize = "none"
+
+                />
 
                 <TouchableOpacity
                     style = {styles.submitButton}
